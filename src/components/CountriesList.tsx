@@ -1,16 +1,12 @@
-import type { ICity } from '../interfaces/ICity';
+import useCities from '../hooks/useCities';
 import type { country } from '../types/country';
 import CountryItem from './CountryItem';
 import styles from './CountryList.module.css';
 import Message from './Message';
 import Spinner from './Spinner';
 
-interface CityListProps {
-    cities: ICity[];
-    isLoading: boolean;
-}
-
-export default function CountriesList({ cities, isLoading }: CityListProps) {
+export default function CountriesList() {
+    const { cities, isLoading } = useCities();
     if (isLoading) return <Spinner />;
     if (!cities.length) return <Message message='Add your first country...' />;
 
