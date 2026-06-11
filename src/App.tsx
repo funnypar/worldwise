@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import City from './components/City';
 import CityList from './components/CityList';
 import CountriesList from './components/CountriesList';
+import From from './components/From';
 import './index.css';
 import type { ICity } from './interfaces/ICity';
 import AppLayout from './pages/AppLayout';
@@ -39,18 +41,14 @@ export default function App() {
                 <Route path='product' element={<Product />} />
                 <Route path='pricing' element={<PricingPage />} />
                 <Route path='app' element={<AppLayout />}>
-                    <Route
-                        index
-                        element={
-                            <CityList cities={cities} isLoading={isLoading} />
-                        }
-                    />
+                    <Route index element={<Navigate replace to='cities' />} />
                     <Route
                         path='cities'
                         element={
                             <CityList cities={cities} isLoading={isLoading} />
                         }
                     />
+                    <Route path='cities/:id' element={<City />} />
                     <Route
                         path='countries'
                         element={
@@ -60,7 +58,7 @@ export default function App() {
                             />
                         }
                     />
-                    <Route path='form' element={<p>form</p>} />
+                    <Route path='form' element={<From />} />
                 </Route>
                 <Route path='login' element={<Login />} />
                 <Route path='*' element={<NotFound />} />

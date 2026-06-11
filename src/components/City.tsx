@@ -1,7 +1,9 @@
+import { useParams } from 'react-router-dom';
 import { formatDate } from '../utils/formatDate';
 import styles from './City.module.css';
 
 export default function City() {
+    const { id } = useParams();
     const currentCity = {
         cityName: 'Lisbon',
         emoji: '🇵🇹',

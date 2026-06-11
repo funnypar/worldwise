@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from './Button';
 import styles from './Form.module.css';
 
 export default function From() {
+    const navigate = useNavigate();
+
     const [cityName, setCityName] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
     const [notes, setNotes] = useState('');
@@ -39,8 +43,16 @@ export default function From() {
             </div>
 
             <div className={styles.buttons}>
-                <button>Add</button>
-                <button>&larr; Back</button>
+                <Button variant='primary'>Add</Button>
+                <Button
+                    variant='back'
+                    onClick={(e) => {
+                        e.preventDefault();
+                        navigate(-1);
+                    }}
+                >
+                    &larr; Back
+                </Button>
             </div>
         </form>
     );
