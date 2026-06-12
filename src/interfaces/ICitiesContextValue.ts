@@ -6,4 +6,5 @@ export interface CitiesContextValue {
     currentCity: ICity | null;
     getCityHanlder: (id: string | undefined) => Promise<void>;
     createCityHandler: (newCity: ICity) => Promise<void>;
+    deleteCityHandler: (id: string) => Promise<void>;
 }

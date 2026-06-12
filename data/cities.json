@@ -37,42 +37,6 @@
       "id": "98443197"
     },
     {
-      "cityName": "’Ain Mahdi",
-      "id": "Aipn_echmto",
-      "country": "Algeria",
-      "emoji": "🇩🇿",
-      "date": "Tue Jun 16 2026 17:25:25 GMT+0300 (Türkiye Standard Time)",
-      "notes": "commune and town in Laghouat Province, Algeria",
-      "position": {
-        "lat": 32.86357816967434,
-        "lng": 2.4266756762975388
-      }
-    },
-    {
-      "cityName": "Markaz al Waḩat ad Dakhilah",
-      "id": "nZ-Q7CAIDmU",
-      "country": "",
-      "emoji": "",
-      "date": "Fri Jun 12 2026 17:29:17 GMT+0300 (Türkiye Standard Time)",
-      "notes": "",
-      "position": {
-        "lat": 26.133820618203238,
-        "lng": 29.13237736493423
-      }
-    },
-    {
-      "cityName": "Markaz al Waḩat ad Dakhilah",
-      "id": "gY3YzxBqEBA",
-      "country": "",
-      "emoji": "",
-      "date": "Fri Jun 12 2026 17:29:17 GMT+0300 (Türkiye Standard Time)",
-      "notes": "",
-      "position": {
-        "lat": 26.133820618203238,
-        "lng": 29.13237736493423
-      }
-    },
-    {
       "cityName": "Chilton Foliat",
       "id": "WV5h4y6mo0E",
       "country": "United Kingdom of Great Britain and Northern Ireland (the)",
@@ -85,18 +49,6 @@
       }
     },
     {
-      "cityName": "Kielder",
-      "id": "yiHHHipB-Nw",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "emoji": "🇬🇧",
-      "date": "Fri Jun 12 2026 17:32:09 GMT+0300 (Türkiye Standard Time)",
-      "notes": "village and civil parish in Northumberland, United Kingdom",
-      "position": {
-        "lat": 55.204151483100965,
-        "lng": -2.596685929634253
-      }
-    },
-    {
       "cityName": "Vejle",
       "id": "oaCGR429mNo",
       "country": "Denmark",
@@ -106,18 +58,6 @@
       "position": {
         "lat": 55.5811881178771,
         "lng": 9.43287239742786
-      }
-    },
-    {
-      "cityName": "Tuczno",
-      "id": "wdqf3FZZ_0Q",
-      "country": "Poland",
-      "emoji": "🇵🇱",
-      "date": "Fri Jun 12 2026 17:32:53 GMT+0300 (Türkiye Standard Time)",
-      "notes": "urban-rural gmina of Poland",
-      "position": {
-        "lat": 53.28036072488321,
-        "lng": 16.16441024518632
       }
     }
   ],

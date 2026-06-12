@@ -51,7 +51,21 @@ export async function createCity(newCity: ICity): Promise<ICity | null> {
         const data: ICity = await res.json();
         return data;
     } catch (e) {
-        console.error('Failed to fetch city:', e);
+        console.error('Failed to create city:', e);
         return null;
+    }
+}
+
+export async function deleteCity(id: string): Promise<void> {
+    try {
+        const res = await fetch(`${BASE_URL}/cities/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+    } catch (e) {
+        console.error('Failed to delete city:', e);
     }
 }

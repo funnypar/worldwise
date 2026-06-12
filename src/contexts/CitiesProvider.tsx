@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { ICity } from '../interfaces/ICity';
-import { createCity, getCities, getCity } from '../services/cities.service';
+import {
+    createCity,
+    deleteCity,
+    getCities,
+    getCity,
+} from '../services/cities.service';
 import { CitiesContext } from './CitiesContext';
 
 interface CitiesContextProps {
@@ -57,6 +62,18 @@ export default function CitiesProvider({ children }: CitiesContextProps) {
         }
     }
 
+    async function deleteCityHandler(id: string) {
+        try {
+            setIsLoading(true);
+            await deleteCity(id);
+            setCities((cities) => cities.filter((city) => city.id !== id));
+        } catch (e) {
+            throw new Error('Failed to fetch city:', { cause: e });
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return (
         <CitiesContext.Provider
             value={{
@@ -65,6 +82,7 @@ export default function CitiesProvider({ children }: CitiesContextProps) {
                 currentCity,
                 getCityHanlder,
                 createCityHandler,
+                deleteCityHandler,
             }}
         >
             {children}
