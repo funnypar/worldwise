@@ -7,19 +7,19 @@ import {
     useMap,
     useMapEvents,
 } from 'react-leaflet';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useCities from '../hooks/useCities';
+import useUrlPosition from '../hooks/useUrlPosition';
 import styles from './Map.module.css';
 
 export default function Map() {
     const { cities } = useCities();
-    const [searchParams] = useSearchParams();
+
     const [mapPosition, setMapPosition] = useState<[number, number]>([
         51.505, -0.09,
     ]);
 
-    const lat = searchParams.get('lat');
-    const lng = searchParams.get('lng');
+    const [lat, lng] = useUrlPosition();
 
     if (lat && lng && (+lat !== mapPosition[0] || +lng !== mapPosition[1])) {
         setMapPosition([+lat, +lng]);
