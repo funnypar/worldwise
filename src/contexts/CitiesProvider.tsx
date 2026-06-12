@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ICity } from '../interfaces/ICity';
-import { getCities, getCity } from '../services/cities.service';
+import { createCity, getCities, getCity } from '../services/cities.service';
 import { CitiesContext } from './CitiesContext';
 
 interface CitiesContextProps {
@@ -42,9 +42,30 @@ export default function CitiesProvider({ children }: CitiesContextProps) {
         }
     }
 
+    async function createCityHandler(newCity: ICity) {
+        try {
+            setIsLoading(true);
+            const data = await createCity(newCity);
+            if (data) {
+                setCurrentCity(newCity);
+                setCities((cities) => [...cities, data]);
+            }
+        } catch (e) {
+            throw new Error('Failed to fetch city:', { cause: e });
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     return (
         <CitiesContext.Provider
-            value={{ cities, isLoading, currentCity, getCityHanlder }}
+            value={{
+                cities,
+                isLoading,
+                currentCity,
+                getCityHanlder,
+                createCityHandler,
+            }}
         >
             {children}
         </CitiesContext.Provider>

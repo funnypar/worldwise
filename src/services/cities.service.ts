@@ -33,3 +33,25 @@ export async function getCity(id: string): Promise<ICity | null> {
         return null;
     }
 }
+
+export async function createCity(newCity: ICity): Promise<ICity | null> {
+    try {
+        const res = await fetch(`${BASE_URL}/cities`, {
+            method: 'POST',
+            body: JSON.stringify(newCity),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+
+        const data: ICity = await res.json();
+        return data;
+    } catch (e) {
+        console.error('Failed to fetch city:', e);
+        return null;
+    }
+}

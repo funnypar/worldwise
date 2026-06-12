@@ -5,16 +5,18 @@ interface ButtonProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onClick?: (e: any) => void;
     variant?: 'primary' | 'back' | 'position';
+    type: 'button' | 'submit';
 }
 
 export default function Button({
     children,
     onClick,
     variant = 'primary',
+    type,
 }: ButtonProps) {
     return (
         <button
-            type='button'
+            type={type}
             onClick={onClick}
             className={`${styles.btn} ${styles[variant]}`}
         >

@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useNavigate } from 'react-router-dom';
+import useCities from '../hooks/useCities';
 import useUrlPosition from '../hooks/useUrlPosition';
+import type { ICity } from '../interfaces/ICity';
 import { fetchGeoLocationCity } from '../services/geoCodingCities.service';
 import { convertToEmoji } from '../utils/convertToEmoji';
 import BackButton from './BackButton';
@@ -9,23 +14,27 @@ import Message from './Message';
 import Spinner from './Spinner';
 
 export default function From() {
-    const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
-    const [ErrorGeocoding, setErrorGeocoding] = useState('');
+    const navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const [cityName, setCityName] = useState('');
-    const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    const [country, setCountry] = useState('');
+    const [date, setDate] = useState<Date | null>(new Date());
     const [notes, setNotes] = useState('');
     const [emoji, setEmoji] = useState('');
     const [lat, lng] = useUrlPosition();
 
+    const { createCityHandler } = useCities();
+
     useEffect(() => {
         async function fetchCityData() {
             try {
-                setErrorGeocoding('');
-                setIsLoadingGeocoding(true);
+                setError('');
+                setIsLoading(true);
                 const city = await fetchGeoLocationCity({ lat, lng });
                 if (city.city == '') {
-                    setErrorGeocoding('No city exists there...');
+                    setError('No city exists there...');
                 }
                 setCityName(city.city);
                 setNotes(
@@ -34,21 +43,53 @@ export default function From() {
                     )[0].description,
                 );
                 setEmoji(convertToEmoji(city.countryCode));
+                setCountry(city.countryName);
             } catch (error) {
                 throw new Error('There is an error to get city...', {
                     cause: error,
                 });
             } finally {
-                setIsLoadingGeocoding(false);
+                setIsLoading(false);
             }
         }
         fetchCityData();
     }, [lat, lng]);
 
-    if (ErrorGeocoding !== '') return <Message message={ErrorGeocoding} />;
-    if (isLoadingGeocoding) return <Spinner />;
+    async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+        try {
+            e.preventDefault();
+            if (!cityName && !date) return;
+            setIsLoading(true);
+
+            const newCity: ICity = {
+                cityName: cityName,
+                id: Math.random().toString(36).substring(2),
+                country: country,
+                emoji: emoji,
+                date: date!.toString(),
+                notes: notes,
+                position: { lat: +lat!, lng: +lng! },
+            };
+
+            await createCityHandler(newCity);
+            navigate('/app/cities');
+        } catch (error) {
+            setError('An error occurred while trying to submit your city.');
+            throw new Error(
+                'An error occurred while trying to submit your city.',
+                { cause: error },
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    if (error !== '') return <Message message={error} />;
+    if (isLoading) return <Spinner />;
+    if (!lat && !lng)
+        return <Message message='Start by clicking somewhere on the map.' />;
     return (
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.row}>
                 <label htmlFor='cityName'>City name</label>
                 <input
@@ -61,10 +102,13 @@ export default function From() {
 
             <div className={styles.row}>
                 <label htmlFor='date'>When did you go to {cityName}?</label>
-                <input
+                <DatePicker
                     id='date'
-                    onChange={(e) => setDate(e.target.value)}
-                    value={date}
+                    selected={date}
+                    onChange={(date: Date | null) => {
+                        setDate(date);
+                    }}
+                    dateFormat='dd/MM/yyyy'
                 />
             </div>
 
@@ -80,7 +124,9 @@ export default function From() {
             </div>
 
             <div className={styles.buttons}>
-                <Button variant='primary'>Add</Button>
+                <Button variant='primary' type='submit'>
+                    Add
+                </Button>
                 <BackButton />
             </div>
         </form>
