@@ -5,6 +5,7 @@ export default function BackButton() {
     const navigate = useNavigate();
     return (
         <Button
+            type='button'
             variant='back'
             onClick={(e) => {
                 e.preventDefault();

@@ -1,7 +1,7 @@
-import type { user } from '../types/user';
+import type { User } from '../types/user';
 import styles from './User.module.css';
 
-const FAKE_USER: user = {
+const FAKE_USER: User = {
     name: 'Jack',
     email: 'jack@example.com',
     password: 'qwerty',
