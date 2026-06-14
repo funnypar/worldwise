@@ -38,7 +38,7 @@ export default function FakeAuthProvider({ children }: UserAuthContextProps) {
         initialState,
     );
 
-    async function login(email: string, password: string) {
+    async function login(email: string, password: string): Promise<void> {
         const user = FAKE_USER;
         if (email === user.email && password === user.password) {
             dispatch({ type: 'login', payload: user });

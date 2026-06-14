@@ -1,15 +1,20 @@
-import { FAKE_USER } from '../constant/fakeUser';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import styles from './User.module.css';
 
 export default function User() {
-    const user = FAKE_USER;
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
 
-    function handleClick() {}
+    async function handleClick() {
+        await logout();
+        navigate('/');
+    }
 
     return (
         <div className={styles.user}>
-            <img src={user.avatar} alt={user.name} />
-            <span>Welcome, {user.name}</span>
+            <img src={user?.avatar} alt={user?.name} />
+            <span>Welcome, {user?.name}</span>
             <button onClick={handleClick}>Logout</button>
         </div>
     );
