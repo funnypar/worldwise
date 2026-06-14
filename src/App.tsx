@@ -3,6 +3,7 @@ import City from './components/City';
 import CityList from './components/CityList';
 import CountriesList from './components/CountriesList';
 import From from './components/From';
+import ProtectedRoute from './components/ProtectedRoute';
 import FakeAuthProvider from './contexts/auth/FakeAuthProvider';
 import CitiesProvider from './contexts/cities/CitiesProvider';
 import './index.css';
@@ -22,7 +23,14 @@ export default function App() {
                         <Route index element={<HomePage />} />
                         <Route path='product' element={<Product />} />
                         <Route path='pricing' element={<PricingPage />} />
-                        <Route path='app' element={<AppLayout />}>
+                        <Route
+                            path='app'
+                            element={
+                                <ProtectedRoute>
+                                    <AppLayout />
+                                </ProtectedRoute>
+                            }
+                        >
                             <Route
                                 index
                                 element={<Navigate replace to='cities' />}
