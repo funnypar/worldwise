@@ -1,6 +1,6 @@
 import type { ICity } from './ICity';
 
-export interface CitiesContextValue {
+export interface ICitiesContextValue {
     cities: ICity[] | null;
     isLoading: boolean;
     currentCity: ICity | Record<string, never>;

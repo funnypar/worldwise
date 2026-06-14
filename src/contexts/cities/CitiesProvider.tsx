@@ -1,13 +1,13 @@
 import { useEffect, useReducer } from 'react';
-import type { ICitiesState } from '../interfaces/ICitiesState';
-import type { ICity } from '../interfaces/ICity';
+import type { ICitiesState } from '../../interfaces/ICitiesState';
+import type { ICity } from '../../interfaces/ICity';
 import {
     createCity,
     deleteCity,
     getCities,
     getCity,
-} from '../services/cities.service';
-import type { CitiesActions } from '../types/citiesActions';
+} from '../../services/cities.service';
+import type { CitiesActions } from '../../types/citiesActions';
 import { CitiesContext } from './CitiesContext';
 
 interface CitiesContextProps {

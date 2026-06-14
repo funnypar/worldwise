@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CitiesContext } from '../contexts/CitiesContext';
+import { CitiesContext } from '../contexts/cities/CitiesContext';
 import type { CitiesContextValue } from '../interfaces/ICitiesContextValue';
 
 export default function useCities(): CitiesContextValue {

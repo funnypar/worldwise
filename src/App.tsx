@@ -3,7 +3,7 @@ import City from './components/City';
 import CityList from './components/CityList';
 import CountriesList from './components/CountriesList';
 import From from './components/From';
-import CitiesProvider from './contexts/CitiesProvider';
+import CitiesProvider from './contexts/cities/CitiesProvider';
 import './index.css';
 import AppLayout from './pages/AppLayout';
 import HomePage from './pages/HomePage';
